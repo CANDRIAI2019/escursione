@@ -14,7 +14,7 @@ ofstream out{"output.txt"};
 
 struct Node {
 	si level;
-	si dislivelloMin = std::numeric_limits<si>::max();
+	si dislivelloMin = numeric_limits<si>::max();
 };
 
 int main() {
@@ -37,16 +37,16 @@ int main() {
 
 		// for(int n = 0; n != N; ++n) {
 		// 	for(int m = 0; m != M; ++m) {
-		// 		std::cout << nodes[n][m].level << " ";
+		// 		cout << nodes[n][m].level << " ";
 		// 	}
-		// 	std::cout << "\n\n";
+		// 	cout << "\n\n";
 		// }
 
-		std::deque<std::pair<si,si>> toProcess{};
+		deque<pair<si,si>> toProcess{};
 		toProcess.push_back({0,0});
 		while (!toProcess.empty()) {
 			auto [x, y] = toProcess.front();
-			constexpr std::pair<si,si> offsets[] {
+			constexpr pair<si,si> offsets[] {
 				{1,0},
 				{-1,0},
 				{0, 1},
@@ -61,13 +61,13 @@ int main() {
 				if(nx < 0 || nx >= N || ny < 0 || ny >= M)
 					continue;
 
-				//std::cout << nx << " " << ny << "\n";
+				//cout << nx << " " << ny << "\n";
 				
-				si dislivello = std::max((si)abs(nodes[nx][ny].level - nodes[x][y].level), nodes[x][y].dislivelloMin);
+				si dislivello = max((si)abs(nodes[nx][ny].level - nodes[x][y].level), nodes[x][y].dislivelloMin);
 				if (nodes[nx][ny].dislivelloMin > dislivello) {
 					nodes[nx][ny].dislivelloMin = dislivello;
 					toProcess.push_back({nx, ny});
-					//std::cout << nx << " " << ny << "\n";					
+					//cout << nx << " " << ny << "\n";					
 				}
 			}
 			toProcess.pop_front();
